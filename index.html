@@ -12,16 +12,22 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
 body {
     min-height: 100vh;
     min-height: 100dvh;
-    font-family: Arial, sans-serif;
     background: linear-gradient(145deg, #fff4eb, #f7f8fc, #e8eef8);
     display: flex;
     flex-direction: column;
 }
 
 .top-bar {
+    width: 100%;
     min-height: 70px;
     padding: 18px 6%;
     background: #fff;
@@ -45,10 +51,11 @@ body {
 
 .main {
     flex: 1;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px 16px;
+    padding: 24px 16px;
 }
 
 .login-box {
@@ -136,17 +143,6 @@ button:hover {
     background: #e85b00;
 }
 
-.notice {
-    margin-top: 20px;
-    padding: 12px;
-    border-radius: 10px;
-    background: #f5f7fb;
-    color: #697489;
-    font-size: 12px;
-    text-align: center;
-    line-height: 1.6;
-}
-
 .footer {
     text-align: center;
     padding: 20px 12px;
@@ -155,22 +151,54 @@ button:hover {
 }
 
 @keyframes appear {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 480px) {
-    .top-bar { padding: 16px 18px; }
-    .login-box { padding: 30px 22px; }
-    h1 { font-size: 25px; }
+    .top-bar {
+        padding: 16px 18px;
+    }
+
+    .login-box {
+        padding: 30px 22px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
 }
 
 @media (max-height: 650px) {
-    .main { padding-top: 12px; padding-bottom: 12px; }
-    .login-box { padding-top: 20px; padding-bottom: 20px; }
-    .icon { width: 48px; height: 48px; margin-bottom: 14px; }
-    .description { margin-bottom: 17px; }
-    .field { margin-bottom: 14px; }
+    .main {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .login-box {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 14px;
+    }
+
+    .description {
+        margin-bottom: 17px;
+    }
+
+    .field {
+        margin-bottom: 14px;
+    }
 }
 </style>
 </head>
@@ -186,9 +214,9 @@ button:hover {
         <div class="icon" aria-hidden="true">Q</div>
 
         <h1>Account Verification</h1>
+
         <p class="description">
-            Enter the details requested by your own application
-            to explore this verification interface.
+            Enter your details to continue.
         </p>
 
         <form id="verificationForm">
@@ -212,12 +240,10 @@ button:hover {
                     required>
             </div>
 
-            <button type="submit">Continue to Verification</button>
+            <button type="submit">
+                Continue to Verification
+            </button>
         </form>
-
-        <div class="notice" id="notice" role="status">
-            Sample interface — no account information is transmitted.
-        </div>
     </section>
 </main>
 
@@ -230,8 +256,7 @@ document.getElementById("verificationForm")
 .addEventListener("submit", function(event) {
     event.preventDefault();
 
-    document.getElementById("notice").textContent =
-        "Interface preview complete. No information was transmitted.";
+    alert("Form submitted successfully.");
 });
 </script>
 </body>
