@@ -1,31 +1,299 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Account Verification</title>
-    <!-- CSS styling goes here to make it look like a mobile app screen -->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Quick Portal</title>
+
     <style>
-        body { background-color: #f4f4f4; font-family: sans-serif; text-align: center; }
-        .login-box { max-width: 360px; margin: 50px auto; padding: 20px; background: white; border-radius: 8px; }
-        .btn-submit { background-color: #ff6600; color: white; border: none; padding: 10px 20px; font-weight: bold; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            background: linear-gradient(
+                145deg, #fff4eb, #f7f8fc 55%, #e8eef8
+            );
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            width: 100%;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 6%;
+            background: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ff6600;
+            letter-spacing: -0.5px;
+        }
+
+        .status {
+            color: #687386;
+            font-size: 12px;
+        }
+
+        .main {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 18px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            padding: 38px 30px;
+            border-radius: 22px;
+            box-shadow: 0 15px 50px rgba(26, 39, 65, 0.09);
+            animation: appear 0.5s ease-out;
+        }
+
+        .icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff0e5;
+            color: #ff6600;
+            border-radius: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 27px;
+            color: #172033;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .description {
+            color: #788195;
+            font-size: 14px;
+            line-height: 1.7;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .field {
+            margin-bottom: 21px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            color: #30394c;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        input {
+            width: 100%;
+            height: 54px;
+            border: 1px solid #e0e5ed;
+            border-radius: 12px;
+            padding: 0 15px;
+            background: #fafbfe;
+            color: #172033;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: #ff6600;
+            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            min-height: 54px;
+            border: none;
+            border-radius: 12px;
+            background: #ff6600;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #e85b00;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .notice {
+            margin-top: 22px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #f5f7fb;
+            color: #697489;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            color: #8a93a3;
+            font-size: 12px;
+            padding: 20px 12px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                min-height: 62px;
+                padding: 16px 20px;
+            }
+
+            .main {
+                padding: 20px 14px;
+            }
+
+            .login-box {
+                padding: 30px 23px;
+                border-radius: 19px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+
+        @media (max-height: 650px) {
+            .main {
+                padding-top: 14px;
+                padding-bottom: 14px;
+            }
+
+            .login-box {
+                padding-top: 22px;
+                padding-bottom: 22px;
+            }
+
+            .icon {
+                width: 48px;
+                height: 48px;
+                margin-bottom: 15px;
+            }
+
+            .description {
+                margin-bottom: 18px;
+            }
+
+            .field {
+                margin-bottom: 14px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-<div class="login-box">
-    <!-- A real system would use secure, verified branding -->
-    <h2>Quick Portal</h2>
-    <p>Please log in to continue.</p>
-    
-    <form>
-        <label>Mobile Number:</label><br>
-        <input type="text" placeholder="e.g., 71234567"><br><br>
-        
-        <label>Account PIN:</label><br>
-        <input type="password" placeholder="••••"><br><br>
-        
-        <button type="submit" class="btn-submit">Submit</button>
-    </form>
-</div>
+    <header class="top-bar">
+        <div class="brand">Quick Portal</div>
+        <div class="status">Demo presentation</div>
+    </header>
+
+    <main class="main">
+        <section class="login-box">
+            <div class="icon" aria-hidden="true">Q</div>
+
+            <h1>Welcome Back</h1>
+
+            <p class="description">
+                This is a sample account portal.
+                Explore the responsive design below.
+            </p>
+
+            <form id="demoForm">
+                <div class="field">
+                    <label for="mobile">Mobile Number</label>
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="Enter a demo number"
+                        autocomplete="off"
+                        required>
+                </div>
+
+                <div class="field">
+                    <label for="pin">Demo PIN</label>
+                    <input
+                        type="password"
+                        id="pin"
+                        placeholder="Enter any demo PIN"
+                        autocomplete="off"
+                        required>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    Preview Portal
+                </button>
+            </form>
+
+            <div class="notice" id="notice" role="status">
+                Demo only. Do not enter real account details.
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        Quick Portal &copy; 2026 · Demonstration website
+    </footer>
+
+    <script>
+        document.getElementById("demoForm")
+            .addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                document.getElementById("notice").textContent =
+                    "Demo complete. No account details were sent or saved.";
+            });
+    </script>
 
 </body>
 </html>
