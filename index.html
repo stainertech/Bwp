@@ -58,28 +58,14 @@ body {
     padding: 24px 16px;
 }
 
-.login-box {
+.page {
     width: 100%;
     max-width: 430px;
     padding: 36px 28px;
     background: #fff;
     border-radius: 22px;
     box-shadow: 0 15px 50px rgba(26, 39, 65, .09);
-    animation: appear .4s ease-out;
-}
-
-.icon {
-    width: 62px;
-    height: 62px;
-    margin: 0 auto 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff0e5;
-    color: #ff6600;
-    border-radius: 18px;
-    font-size: 28px;
-    font-weight: 800;
+    animation: appear .35s ease-out;
 }
 
 h1 {
@@ -143,11 +129,32 @@ button:hover {
     background: #e85b00;
 }
 
+.secondary {
+    background: #eef1f6;
+    color: #30394c;
+    margin-top: 12px;
+}
+
+.secondary:hover {
+    background: #e0e5ed;
+}
+
+.otp-input {
+    text-align: center;
+    letter-spacing: 10px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
 .footer {
     text-align: center;
     padding: 20px 12px;
     color: #8a93a3;
     font-size: 12px;
+}
+
+.hidden {
+    display: none;
 }
 
 @keyframes appear {
@@ -166,8 +173,9 @@ button:hover {
         padding: 16px 18px;
     }
 
-    .login-box {
+    .page {
         padding: 30px 22px;
+        border-radius: 19px;
     }
 
     h1 {
@@ -181,19 +189,13 @@ button:hover {
         padding-bottom: 12px;
     }
 
-    .login-box {
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
-    .icon {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 14px;
+    .page {
+        padding-top: 22px;
+        padding-bottom: 22px;
     }
 
     .description {
-        margin-bottom: 17px;
+        margin-bottom: 18px;
     }
 
     .field {
@@ -204,22 +206,23 @@ button:hover {
 </head>
 
 <body>
+
 <header class="top-bar">
     <div class="brand">Quick Portal</div>
     <div class="status">Verification Desk</div>
 </header>
 
 <main class="main">
-    <section class="login-box">
-        <div class="icon" aria-hidden="true">Q</div>
 
+    <!-- PAGE ONE -->
+    <section class="page" id="detailsPage">
         <h1>Account Verification</h1>
 
         <p class="description">
             Enter your details to continue.
         </p>
 
-        <form id="verificationForm">
+        <form id="detailsForm">
             <div class="field">
                 <label for="mobile">Enter your phone number</label>
                 <input
@@ -245,6 +248,45 @@ button:hover {
             </button>
         </form>
     </section>
+
+    <!-- PAGE TWO: OTP PROTOTYPE -->
+    <section class="page hidden" id="otpPage">
+        <h1>OTP Verification</h1>
+
+        <p class="description">
+            Enter a test verification code to preview this screen.
+            Do not enter a real account security code.
+        </p>
+
+        <form id="otpForm">
+            <div class="field">
+                <label for="otp">Verification Code</label>
+                <input
+                    type="text"
+                    id="otp"
+                    class="otp-input"
+                    placeholder="••••••"
+                    inputmode="numeric"
+                    maxlength="6"
+                    pattern="[0-9]{6}"
+                    autocomplete="off"
+                    required>
+            </div>
+
+            <button type="submit">
+                Verify Code
+            </button>
+
+            <button type="button" class="secondary" id="backButton">
+                Back
+            </button>
+        </form>
+
+        <p id="result" class="description hidden"
+           style="margin-top:20px; margin-bottom:0;">
+        </p>
+    </section>
+
 </main>
 
 <footer class="footer">
@@ -252,12 +294,35 @@ button:hover {
 </footer>
 
 <script>
-document.getElementById("verificationForm")
+const detailsPage = document.getElementById("detailsPage");
+const otpPage = document.getElementById("otpPage");
+
+document.getElementById("detailsForm")
 .addEventListener("submit", function(event) {
     event.preventDefault();
 
-    alert("Form submitted successfully.");
+    // Navigate to the second screen without transmitting
+    // or saving the phone number or PIN.
+    detailsPage.classList.add("hidden");
+    otpPage.classList.remove("hidden");
+});
+
+document.getElementById("backButton")
+.addEventListener("click", function() {
+    otpPage.classList.add("hidden");
+    detailsPage.classList.remove("hidden");
+});
+
+document.getElementById("otpForm")
+.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const result = document.getElementById("result");
+    result.textContent =
+        "Prototype complete. No verification code was transmitted.";
+    result.classList.remove("hidden");
 });
 </script>
+
 </body>
 </html>
